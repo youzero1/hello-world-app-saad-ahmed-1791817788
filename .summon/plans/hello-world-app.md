@@ -1,5 +1,5 @@
 ---
-status: pending
+status: implemented
 title: Hello World App
 option: light-dark-toggle :: Light & Dark Toggle :: A clean hello world page with a simple switch that flips between light and dark themes.
 option: theme-palette-picker :: Theme Palette Picker :: A hello world page with a row of color-theme swatches (Ocean, Sunset, Forest, Mono) that restyle the whole page.

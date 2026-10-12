@@ -1,1 +1,33 @@
 @import "tailwindcss";
+
+/* Each theme is a set of CSS custom properties. Switching themes = changing
+   the data-theme attribute on <html> — every themed color follows at once. */
+:root,
+[data-theme='ocean'] {
+  --theme-bg: #082f49;
+  --theme-text: #e0f2fe;
+  --theme-accent: #38bdf8;
+}
+
+[data-theme='sunset'] {
+  --theme-bg: #450a0a;
+  --theme-text: #fee2e2;
+  --theme-accent: #fb7185;
+}
+
+[data-theme='forest'] {
+  --theme-bg: #052e16;
+  --theme-text: #dcfce7;
+  --theme-accent: #4ade80;
+}
+
+[data-theme='mono'] {
+  --theme-bg: #09090b;
+  --theme-text: #fafafa;
+  --theme-accent: #a1a1aa;
+}
+
+html {
+  background-color: var(--theme-bg);
+  transition: background-color 0.5s ease;
+}
