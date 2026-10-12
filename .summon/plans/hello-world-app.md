@@ -5,6 +5,7 @@ option: light-dark-toggle :: Light & Dark Toggle :: A clean hello world page wit
 option: theme-palette-picker :: Theme Palette Picker :: A hello world page with a row of color-theme swatches (Ocean, Sunset, Forest, Mono) that restyle the whole page.
 option: system-aware-themes :: System-Aware Themes :: The page matches the visitor's device light/dark setting automatically, with buttons to override it.
 recommended: theme-palette-picker
+selected: theme-palette-picker
 ---
 
 # Hello World App
