@@ -1,10 +1,10 @@
 ---
 status: pending
 title: Hello World App
-option: classic-minimal :: Classic Minimal :: A single elegant page with a centered "Hello, World!" message and clean typography.
-option: personalized-greeter :: Personalized Greeter :: An interactive page where the visitor types their name and gets a friendly custom greeting.
-option: playful-animated :: Playful Animated :: A lively page with animated gradients, floating shapes, and a button that cycles through greetings.
-recommended: personalized-greeter
+option: light-dark-toggle :: Light & Dark Toggle :: A clean hello world page with a simple switch that flips between light and dark themes.
+option: theme-palette-picker :: Theme Palette Picker :: A hello world page with a row of color-theme swatches (Ocean, Sunset, Forest, Mono) that restyle the whole page.
+option: system-aware-themes :: System-Aware Themes :: The page matches the visitor's device light/dark setting automatically, with buttons to override it.
+recommended: theme-palette-picker
 ---
 
 # Hello World App
@@ -13,34 +13,32 @@ recommended: personalized-greeter
 
 1. Scaffold the project base: `package.json`, `index.html`, `vite.config.ts`, `tsconfig.json`, and `src/main.tsx` mounting the app with TanStack Router.
    - Expected outcome: the dev server can start and renders a blank routed app.
-2. Create `src/styles/global.css` starting with `@import "tailwindcss";` and import it once in `src/main.tsx`.
-   - Expected outcome: Tailwind utility classes work everywhere.
-3. Create the app shell in `src/routes/__root.tsx` with a full-viewport centered layout.
-   - Expected outcome: every route sits inside a centered, full-height container.
-4. Create the home route in `src/routes/index.tsx` (the actual hello world content depends on the chosen option below).
-   - Expected outcome: visiting `/` shows the hello world experience.
+2. Create `src/styles/global.css` starting with `@import "tailwindcss";` and import it once in `src/main.tsx`. Define each theme's colors (background, text, accent) as CSS custom properties so themes can be swapped by changing one attribute on the page root.
+   - Expected outcome: Tailwind utility classes work everywhere, and colors are driven by swappable theme variables.
+3. Create the app shell in `src/routes/__root.tsx` with a full-viewport centered layout that applies the active theme's background and text colors with a smooth color transition.
+   - Expected outcome: every route sits inside a centered, full-height container whose colors follow the active theme.
+4. Add a theme helper in `src/hooks/useTheme.ts` that holds the active theme name, applies it to the root element, and exposes a way to switch themes.
+   - Expected outcome: theme state is managed in one place and applies app-wide.
+5. Create the home route in `src/routes/index.tsx` showing a large "Hello, World!" headline with a short subtitle, plus the theme controls (which depend on the chosen option below).
+   - Expected outcome: visiting `/` shows the hello world page with working theme controls.
 
-## Option: Classic Minimal
+## Option: Light & Dark Toggle
 
-5. Build the home route as a single centered "Hello, World!" heading with a short subtitle, using generous whitespace and refined typography (large display text, muted subtitle, subtle accent underline).
-   - Expected outcome: a calm, polished one-screen page that simply says hello.
-6. Add a small footer line with the current year.
-   - Expected outcome: the page feels finished and intentional.
+6. Add a sun/moon toggle button in the top corner that flips between a light theme (soft white background, dark text) and a dark theme (deep charcoal background, light text).
+   - Expected outcome: clicking the toggle instantly switches the whole page between light and dark.
+7. Remember the visitor's choice in browser storage so the theme persists on reload.
+   - Expected outcome: returning visitors see the theme they last picked.
 
-## Option: Personalized Greeter
+## Option: Theme Palette Picker
 
-5. Build the home route with a text input asking for the visitor's name and a "Say hello" button; below it, show a live greeting that updates to "Hello, <name>!" as they type, defaulting to "Hello, World!" when empty.
-   - Expected outcome: typing a name instantly personalizes the greeting on screen.
-6. Add a small set of greeting-style chips (e.g. "Hey", "Hola", "Bonjour") that swap the greeting word when clicked.
-   - Expected outcome: the visitor can play with different greetings without typing.
-7. Add a subtle entrance transition when the greeting text changes.
-   - Expected outcome: greeting changes feel smooth rather than abrupt.
+6. Define four named themes (Ocean, Sunset, Forest, Mono), each with its own background, text, and accent colors, and show a row of labeled color swatches under the headline.
+   - Expected outcome: clicking a swatch restyles the entire page in that theme's colors.
+7. Highlight the active swatch, show the active theme's name in the subtitle, and animate color changes with a smooth transition.
+   - Expected outcome: switching themes feels polished and the current theme is always clear.
 
-## Option: Playful Animated
+## Option: System-Aware Themes
 
-5. Build the home route with a bold "Hello, World!" headline over an animated gradient background, plus a few softly floating decorative shapes.
-   - Expected outcome: the page feels alive and colorful on load.
-6. Add a "Say it differently" button that cycles the headline through greetings in several languages with a short pop/fade animation on each change.
-   - Expected outcome: each click swaps the greeting with a satisfying animation.
-7. Add a light confetti burst the first time the button is clicked.
-   - Expected outcome: the interaction feels celebratory and fun.
+6. Detect the visitor's device light/dark preference on load and apply the matching theme automatically; add "Light", "Dark", and "Auto" buttons so the visitor can override it.
+   - Expected outcome: the page matches the device setting by default and can be manually overridden at any time.
+7. While set to "Auto", keep the page in sync if the device preference changes while the page is open.
+   - Expected outcome: the theme follows the system live without needing a reload.
